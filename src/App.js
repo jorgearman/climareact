@@ -4,6 +4,8 @@ import Header from './Components/Header';
 
 import Formulario from './Components/Formulario';
 import Error from './Components/Error';
+import Clima from './Components/Clima';
+
 
 function App() {
 
@@ -14,6 +16,8 @@ function App() {
   const [ pais, guardarPais ] = useState('');
   const [error, guardarError] = useState(false);
   const [resultado, guardarResultado] = useState('');
+
+
   useEffect(() => {
 
     //revenir ejecución primera vez
@@ -29,6 +33,7 @@ function App() {
       //Consultar url
       const respuesta = await fetch(url);
       const resultado = await respuesta.json();
+
       console.log(resultado);
       guardarResultado(resultado);
     
@@ -59,9 +64,13 @@ function App() {
   if (error) {
     //hay un error
     componente = <Error mensaje ='Ambos campos son obligatorios' />
+  }else if (resultado.cod == "404") {
+    componente = <Error mensaje ='Laciudad no existe en el software' />
   }else {
     //mostrar clima
-    componente = null;
+    componente = <Clima 
+                    resultado = {resultado}
+                  />;
   }
 
 

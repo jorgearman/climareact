@@ -23,7 +23,7 @@ function Formulario ({datosConsulta}){
     }
 
     const consultarClima = e => {
-        e.preventDefault();
+        e.preventDefault();    
         //Pasa al componente ppal la busqueda
         datosConsulta(busqueda);
     }
